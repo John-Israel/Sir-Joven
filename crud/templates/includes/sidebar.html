@@ -1,0 +1,61 @@
+<!-- Navbar -->
+<nav class="fixed top-0 z-50 w-full bg-[#1f2937] border-b border-gray-700">
+  <div class="px-3 py-3 lg:px-5 lg:pl-3">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center justify-start">
+        <a href="#" class="flex ms-2 md:me-24">
+          <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 me-3" alt="FlowBite Logo" />
+          <span class="self-center text-xl font-semibold whitespace-nowrap text-white">Flowbite</span>
+        </a>
+      </div>
+      <div class="flex items-center">
+        <img class="w-8 h-8 rounded-full border border-gray-600" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Sidebar -->
+<aside id="top-bar-sidebar" class="fixed top-0 left-0 z-40 w-64 h-full pt-20 transition-transform -translate-x-full sm:translate-x-0 bg-[#1f2937] border-e border-gray-700" aria-label="Sidebar">
+   <div class="h-full px-3 pb-4 overflow-y-auto bg-[#1f2937]">
+      <ul class="space-y-2 font-medium">
+         <!-- Gender List -->
+         <li>
+            <a href="/gender/list" class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-700 group">
+               <svg class="w-5 h-5 text-gray-400 transition duration-75 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
+                  <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"/>
+                  <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"/>
+               </svg>
+               <span class="ms-3">Gender List</span>
+            </a>
+         </li>
+         <!-- Add Gender -->
+         <li>
+            <a href="/gender/add" class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-700 group">
+               <svg class="shrink-0 w-5 h-5 text-gray-400 transition duration-75 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+               </svg>
+               <span class="ms-3">Add Gender</span>
+            </a>
+         </li>
+         <!-- User List -->
+         <li>
+            <a href="#" class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-700 group">
+               <svg class="shrink-0 w-5 h-5 text-gray-400 transition duration-75 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                  <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.999 2.999 0 0 1-3 3H2a2.999 2.999 0 0 1-3-3v-2c0-1.023.309-1.972.838-2.76A8.954 8.954 0 0 0 7 9a6.983 6.983 0 0 1 7.236 2h1Z"/>
+               </svg>
+               <span class="ms-3">User List</span>
+            </a>
+         </li>
+         <!-- Add User -->
+         <li>
+            <a href="#" class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-700 group">
+               <svg class="shrink-0 w-5 h-5 text-gray-400 transition duration-75 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.293 11.293-2.5 2.5a1 1 0 0 1-1.414 0l-2.5-2.5a1 1 0 1 1 1.414-1.414L9 10.586V5a1 1 0 0 1 2 0v5.586l.793-.793a1 1 0 1 1 1.414 1.414Z"/>
+               </svg>
+               <span class="ms-3">Add User</span>
+            </a>
+         </li>
+      </ul>
+   </div>
+</aside>
