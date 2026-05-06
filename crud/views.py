@@ -4,6 +4,12 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from .models import Genders, Users
+from django.shortcuts import render, get_object_or_404
+from .models import Users # Ensure your User model is imported
+
+def edit_user(request, userId):
+    user = get_object_or_404(User, user_id=userId)
+    return render(request, 'usersList.html', {'user': user})
 
 # CRUD feature for Gender
 def gender_list(request):

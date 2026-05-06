@@ -1,4 +1,5 @@
 {% extends "layout/base.html" %}
+{% load static %}
 
 {% block 'title' %}
 Users List
@@ -8,6 +9,7 @@ Users List
 
 {% include "includes/sidebar.html" %}
 {% include "includes/ToastMessage.html" %}
+
 <div class="p-2 sm:ml-64 mt-16 md:mt-14">
     <div class="relative overflow-x-auto rounded-sm shadow-sm">
         <table class="w-full">
@@ -20,12 +22,21 @@ Users List
                     <th class="px-6 py-3">Contact Number</th>
                     <th class="px-6 py-3">Email</th>
                     <th class="px-6 py-3">Action</th>
-
                 </tr>
             </thead>
-            <tbody class="text-xs text-black">
+            <tbody id="user-table-body" class="text-xs text-black">
+                <!-- Skeleton Loading Rows (Initial perceived performance) -->
+                {% for i in "12345" %}
+                <tr class="skeleton-row border-b border-gray-200">
+                    <td colspan="7" class="px-6 py-4">
+                        <div class="h-4 bg-gray-200 animate-pulse rounded w-full"></div>
+                    </td>
+                </tr>
+                {% endfor %}
+
                 {% for user in users %}
-                <tr class="hover:bg-gray-100 border-b border-gray-200">
+                <!-- Added 'user-row', 'opacity-0', and 'translate-y-4' for lazy reveal -->
+                <tr class="user-row hidden opacity-0 translate-y-4 transition-all duration-500 hover:bg-gray-100 border-b border-gray-200">
                     <td class="px-6 py-3">{{ user.full_name }}</td>
                     <td class="px-6 py-3">{{ user.gender.gender }}</td>
                     <td class="px-6 py-3">{{ user.birthdate }}</td>
@@ -44,5 +55,46 @@ Users List
         </table>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 1. Initial delay to swap Skeletons for actual hidden data
+        setTimeout(() => {
+            const skeletons = document.querySelectorAll('.skeleton-row');
+            const userRows = document.querySelectorAll('.user-row');
+
+            skeletons.forEach(el => el.remove());
+            userRows.forEach(el => el.classList.remove('hidden'));
+
+            // 2. Set up Intersection Observer for scroll-based lazy reveal
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 // Trigger when 10% of the row is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Reveal row with animation
+                        entry.target.classList.remove('opacity-0', 'translate-y-4');
+                        entry.target.classList.add('opacity-100', 'translate-y-0');
+                        // Stop watching this row once it's visible
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            userRows.forEach(row => observer.observe(row));
+        }, 600); 
+    });
+</script>
+
+<style>
+    /* Ensure the hardware acceleration for smoother scroll transitions */
+    .user-row {
+        will-change: transform, opacity;
+    }
+</style>
 
 {% endblock 'content' %}

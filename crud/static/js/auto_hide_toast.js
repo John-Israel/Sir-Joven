@@ -1,7 +1,13 @@
-setTimeout(() => {
-    // This finds ALL elements with the id "toast-success"
-    const toasts = document.querySelectorAll('#toast-success');
-    toasts.forEach(toast => {
-        toast.style.display = 'none';
-    });
-}, 2000); // 2000ms = 2 seconds
+document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+        const toasts = document.querySelectorAll('[id^="toast-"]');
+        toasts.forEach(toast => {
+            toast.style.opacity = "0";
+            toast.style.transform = "translateX(100%)";
+
+            setTimeout(() => {
+                toast.remove();
+            }, 300); // matches animation
+        });
+    }, 2000);
+});
