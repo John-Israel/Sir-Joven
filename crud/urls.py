@@ -8,6 +8,7 @@ urlpatterns = [
     path('gender/delete/<int:genderId>', views.delete_gender),
     # Paths for CRUD users
     path('users/list', views.userList),
-    path('users/add', views.add_user)
-    
+    path('users/add', views.add_user),
+    path('users/delete/<int:userId>', views.delete_user,),
+    path('users/list/', views.userList,)
 ]

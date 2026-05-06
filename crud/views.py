@@ -126,4 +126,24 @@ def userList(request):
         return render(request, 'users/usersList.html', data)
     except Exception as e:
         return HttpResponse(f' Error Occured during load users: {e}')
+       
+def delete_user(request, userId):
+    try:
+        if request.method == 'POST':
+            userObj = Users.objects.get(pk=userId)
+            userObj.delete()
+
+            messages.success(request, 'User deleted successfully!')
+            return redirect('/users/list')
+        else:
+
+            userObj = Users.objects.get(pk=userId)
+
+            data = {
+                'user': userObj
+            }
+
+        return render(request, 'users/DeleteUser.html', data)
+    except Exception as e:
+        return HttpResponse(f'Error occurred during deleteUser: {e}')    
    
