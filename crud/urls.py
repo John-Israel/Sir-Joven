@@ -5,5 +5,9 @@ urlpatterns = [
     path('gender/list', views.gender_list),
     path('gender/add', views.add_gender),
     path('gender/edit/<int:genderId>', views.editGender),
-    path('gender/delete/<int:genderId>', views.delete_gender)
+    path('gender/delete/<int:genderId>', views.delete_gender),
+    # Paths for CRUD users
+    path('users/list', views.userList),
+    path('users/add', views.add_user)
+    
 ]
