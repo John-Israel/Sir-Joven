@@ -27,3 +27,51 @@ def add_gender(request):
       return render(request, 'gender/addgender.html')
  except Exception as e:
     return HttpResponse(f' Error Occured during add gender: {e}')
+ 
+def editGender(request, genderId):
+   try:
+        if request.method=='POST':
+           genderObj = Genders.objects.get(pk=genderId)
+           gender = request.POST.get('gender')
+
+           genderObj.gender = gender
+           genderObj.save()
+
+           messages.success(request,'Gender updated succesfully! ')
+
+           data = {
+                'gender': genderObj
+            }
+           
+           return render(request, 'gender/editGender.html', data)
+
+        else:
+            genderObj = Genders.objects.get(pk=genderId)
+
+            data = {
+                'gender': genderObj
+            }
+       
+            return render(request, 'gender/editGender.html', data)
+        
+   except Exception as e:
+        return HttpResponse(f' Error Occured during edit gender: {e}')
+def delete_gender(request, genderId):
+    try:
+        if request.method=='POST':
+            genderObj = Genders.objects.get(pk=genderId)
+            genderObj.delete()
+
+            messages.success(request,'Gender deleted succesfully! ')
+            return redirect('/gender/list')
+        else:
+         
+         genderObj = Genders.objects.get(pk=genderId)
+
+         data = {
+                'gender': genderObj
+            }
+       
+        return render(request, 'gender/DeleteGender.html', data)
+    except Exception as e:
+         return HttpResponse(f' Error Occured during deleteGender: {e}')
