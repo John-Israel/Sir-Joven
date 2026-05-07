@@ -59,7 +59,7 @@ def editGender(request, genderId):
        
             return render(request, 'gender/editGender.html', data)
         n
-   except Exceptio as e:
+   except Exception as e:
         return HttpResponse(f' Error Occured during edit gender: {e}')
 def delete_gender(request, genderId):
     try:
