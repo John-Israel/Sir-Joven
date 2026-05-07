@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
@@ -9,6 +11,6 @@ urlpatterns = [
     # Paths for CRUD users
     path('users/list', views.userList),
     path('users/add', views.add_user),
-    path('users/delete/<int:userId>', views.delete_user,),
-    path('users/list/', views.userList,)
-]
+    path('users/edit/<int:userId>', views.editUser),
+    path('users/delete/<int:userId>', views.delete_user,)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

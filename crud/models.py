@@ -22,6 +22,7 @@ class Users(models.Model):
     email = models.CharField(max_length=128, blank=True)
     username = models.CharField(max_length=64, blank=False, unique=True)
     password = models.CharField(max_length=255, blank=False)
+    profile_pic = models.ImageField(upload_to='profile_pics/', blank=False, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     

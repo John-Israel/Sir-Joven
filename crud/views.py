@@ -6,10 +6,7 @@ from django.contrib import messages
 from .models import Genders, Users
 from django.shortcuts import render, get_object_or_404
 from .models import Users # Ensure your User model is imported
-
-def edit_user(request, userId):
-    user = get_object_or_404(User, user_id=userId)
-    return render(request, 'usersList.html', {'user': user})
+from django.contrib.auth.hashers import make_password
 
 # CRUD feature for Gender
 def gender_list(request):
@@ -61,8 +58,8 @@ def editGender(request, genderId):
             }
        
             return render(request, 'gender/editGender.html', data)
-        
-   except Exception as e:
+        n
+   except Exceptio as e:
         return HttpResponse(f' Error Occured during edit gender: {e}')
 def delete_gender(request, genderId):
     try:
@@ -98,7 +95,16 @@ def add_user(request):
             email = request.POST.get('email')
             username = request.POST.get('username')
             password = request.POST.get('password')
+            profilePic = request.FILES.get('profile_pic', 'None')
             confirmPassword = request.POST.get('confirm_password')
+
+            if password != confirmPassword:
+                messages.error(request, 'Passwords do not match!')
+                return redirect('/users/add')
+
+            if len(password) < 8:
+                messages.error(request, 'Password must be at least 8 characters!')
+                return redirect('/users/add')
 
             Users.objects.create(
                full_name=fullName,
@@ -108,6 +114,7 @@ def add_user(request):
                contact_number=contactNumber,
                email=email,
                username=username,
+               profile_pic=profilePic,
                password=password
             ).save()
 
@@ -152,4 +159,34 @@ def delete_user(request, userId):
         return render(request, 'users/DeleteUser.html', data)
     except Exception as e:
         return HttpResponse(f'Error occurred during deleteUser: {e}')    
-   
+    
+
+def editUser(request, userId):
+   try:
+        if request.method=='POST':
+            userObj = Users.objects.get(pk=userId)
+            
+
+            if request.FILES.get('profile_pic'):
+                userObj.profile_pic = request.FILES.get('profile_pic')
+                userObj.save()
+
+            messages.success(request,'User updated succesfully! ')
+
+            data = {
+                'user': userObj
+            }
+           
+            return render(request, 'users/editUser.html', data)
+
+        else:
+            userObj = Users.objects.get(pk=userId)
+
+            data = {
+                'user': userObj
+            }
+       
+            return render(request, 'users/editUser.html', data)
+        
+   except Exception as e:
+        return HttpResponse(f' Error Occured during edit user: {e}')
