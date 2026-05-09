@@ -190,3 +190,16 @@ def editUser(request, userId):
         
    except Exception as e:
         return HttpResponse(f' Error Occured during edit user: {e}')
+
+# additional features
+# 1. search the query for specific item
+def searchUser(request):
+    searched = request.GET.get('searched', "")
+    if searched:
+        items = Users.objects.filter(name__icontains=searched)
+    else:
+        items = Users.objects.none()
+    return render(request, 'usersList.html', {
+        'user': items,
+        'searched': searched
+    })
