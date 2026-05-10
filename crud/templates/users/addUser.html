@@ -39,7 +39,12 @@
                     </div>
                     <div>
                         <label for="password" class="block text-sm font-medium mb-2">Password</label>
-                        <input type="password" class="bg-white px-3 py-2.5 border border-gray-300 text-black block text-sm rounded-sm w-full focus:outline-none focus:ring-blue-600 focus:border-blue-600" name="password" id="password" required />
+                        <div class="relative w-full">
+                            <input type="password" class="w-full border border-gray-300 rounded-sm px-3 py-2 pr-16 text-sm focus:outline-none focus:ring-blue-600 focus:border-blue-600" name="password" id="password" required />
+                            <button onclick="togglePassword()" id="showPassword" class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-blue-500 hover:text-blue-700 font-medium">  
+                            Show
+                            </button>
+                        </div>
                     </div>
                     
                     <div>
@@ -58,9 +63,9 @@
                 <div>
                     <label for="profile_pic" class="cursor-pointer flex flex-col items-center mt-4 mb-4">
                         {% if user.profile_pic %}
-                            <img src="{{ user.profile_pic.url }}" alt="Current Profile Picture" id="preview_img" class="w-24 h-24 rounded-full object-cover mb-2 border-2 border-gray-300 shadow-md ring-2 ring-offset-2 ring-gray-200"/>
+                            <img src="{{ user.profile_pic.url }}" alt="Current Profile Picture" id="preview_img" class="w-32 h-32 rounded-full object-cover mb-2 border-2 border-gray-300 shadow-md ring-2 ring-offset-2 ring-gray-200"/>
                         {% else %}
-                            <img src="upload-icon.png" alt="Upload" id="preview_img" class="w-16 h-16 mb-2 border-2 border-dashed border-gray-300 shadow-sm rounded-full p-1"/>
+                            <img src="/media/profile_pics/default_profile_pic.png" alt="Upload" id="preview_img" class="w-24 h-24 mb-2 border-2 border-dashed border-gray-300 shadow-sm rounded-full p-1"/>
                         {% endif %}
                         <span class="text-sm text-gray-500">Choose a Profile Picture</span>
                     </label>
@@ -114,6 +119,17 @@
             reader.readAsDataURL(file);
         }
     });
+
+    //show password method 
+    let visible = false;
+    function togglePassword() {
+        visible = !visible;
+        const input = document.getElementById('password');
+        const btn = document.getElementById('showPassword');
+        input.type = visible ? 'text' : 'password';
+        btn.setAttribute('aria-label', visible ? 'Hide Password' : 'Show Password');
+        btn.textContext = visible ? 'Hide' : 'Show';
+    }
 </script>
 
 {% endblock 'content' %}

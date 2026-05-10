@@ -95,9 +95,9 @@ def add_user(request):
             email = request.POST.get('email')
             username = request.POST.get('username')
             password = request.POST.get('password')
-            profilePic = request.FILES.get('profile_pic', 'None')
+            profilePic = request.FILES.get('profile_pic')
             confirmPassword = request.POST.get('confirm_password')
-
+                
             if password != confirmPassword:
                 messages.error(request, 'Passwords do not match!')
                 return redirect('/users/add')
@@ -114,7 +114,7 @@ def add_user(request):
                contact_number=contactNumber,
                email=email,
                username=username,
-               profile_pic=profilePic,
+               profile_pic=profilePic if profilePic else 'profile_pics/default_profile_pic.png',
                password=password
             ).save()
 

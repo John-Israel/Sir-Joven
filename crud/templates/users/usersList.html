@@ -35,8 +35,6 @@ Users List
                 </tr>
             </thead>
             <tbody id="user-table-body" class="text-xs text-black">
-
-                <!-- Skeleton Loading Rows (shown while JS hasn't run yet) -->
                 {% for i in "12345" %}
                     <tr class="skeleton-row border-b border-gray-200">
                         <td colspan="8" class="px-6 py-4">
@@ -44,8 +42,7 @@ Users List
                         </td>
                     </tr>
                 {% endfor %}
-
-                <!-- All user rows — hidden by default, JS controls visibility -->
+{% comment %} views all list and limits them {% endcomment %}
                 {% for user in users %}
                 <tr class="user-row hidden opacity-0 translate-y-4 transition-all duration-500 hover:bg-gray-100 border-b border-gray-200"
                     data-index="{{ forloop.counter }}">
@@ -71,7 +68,7 @@ Users List
                 </tr>
                 {% endfor %}
 
-                <!-- Loading skeleton rows (shown between page loads) -->
+                <!-- loading screen animation -->
                <tr id="bottom-loader" class="hidden">
                 <td colspan="8" class="py-6 text-center">
                     <div class="flex items-center justify-center gap-2">
@@ -86,7 +83,7 @@ Users List
         </table>
     </div>
 
-    <!-- Scroll hint — hidden once all users are loaded -->
+    <!-- code for the lazy loading, search, and see more animation -->
     <script>
     const PAGE_SIZE = 5;
     let currentPage = 1;
@@ -168,7 +165,7 @@ Users List
             hideLoader();
             showFilteredPage(currentPage + 1);
             isLoading = false;
-        }, 800); // Adjust delay to taste
+        }, 600); 
     }
 
     container.addEventListener('scroll', () => {

@@ -9,7 +9,6 @@ Genders List
 
 {% include "includes/sidebar.html" %}
 {% include "includes/ToastMessage.html" %}
-<!-- Toast Messages Section -->
     {% if messages %}
         {% for message in messages %}
         <div id="toast-success" class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow-sm border border-gray-100" role="alert">
@@ -40,7 +39,6 @@ Genders List
                     </tr>
                 </thead>
                 <tbody id="gender-table-body" class="text-xs text-black">
-                    <!-- Skeleton Loading Rows (Initial Load Only) -->
                     {% for i in "12345" %}
                     <tr class="skeleton-row border-b border-gray-800-200">
                         <td class="px-6 py-3"><div class="h-4 bg-gray-400 animate-pulse w-24"></div></td>
@@ -48,7 +46,6 @@ Genders List
                     </tr>
                     {% endfor %}
 
-                    <!-- Data Rows with Scroll Reveal -->
                     {% for gender in genders %}
                     <tr class="gender-row opacity-1 translate-y-4 transition-all duration-500 hidden hover:bg-gray-100 border-b border-gray-300">
                         <td class="px-6 py-3 text-black font-bold">{{ gender.gender }}</td>
@@ -67,26 +64,22 @@ Genders List
 </div>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // 1. Initial Skeleton to Data Swap
         setTimeout(() => {
             document.querySelectorAll('.skeleton-row').forEach(el => el.remove());
             
             const rows = document.querySelectorAll('.gender-row');
             rows.forEach(el => el.classList.remove('hidden'));
 
-            // 2. Initialize Intersection Observer (Lazy Scroll Reveal)
             const observerOptions = {
-                root: null, // use the viewport
-                threshold: 0.1 // trigger when 10% of the row is visible
+                root: null,
+                threshold: 0.1
             };
 
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Reveal the row
                         entry.target.classList.remove('opacity-0', 'translate-y-4');
                         entry.target.classList.add('opacity-100', 'translate-y-0');
-                        // Stop observing once revealed
                         observer.unobserve(entry.target);
                     }
                 });
